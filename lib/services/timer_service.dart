@@ -1,17 +1,19 @@
 import 'dart:async';
 import 'dart:ui';
 
+enum TimerMode { countdown, stopwatch }
+
 class TimerService {
   late int duration;
-  late int _remainingTime;
-  late double progress;
+  int _remainingTime;
+  double progress;
   Timer? _timer;
   bool isRunning = false;
+  TimerMode mode;
 
-  TimerService({required this.duration}) {
-    _remainingTime = duration;
-    progress = 1.0;
-  }
+  TimerService({this.duration = 60, this.mode = TimerMode.countdown})
+      : _remainingTime = duration,
+        progress = 1.0;
 
   // 타이머 상태 변경 리스너
   VoidCallback? onTick;
@@ -21,6 +23,14 @@ class TimerService {
     if (isRunning) return;
     isRunning = true;
 
+    if (mode == TimerMode.countdown) {
+      _startCountdown();
+    } else if (mode == TimerMode.stopwatch) {
+      _startStopwatch();
+    }
+  }
+
+  void _startCountdown() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_remainingTime > 0) {
         _remainingTime--;
@@ -33,6 +43,13 @@ class TimerService {
     });
   }
 
+  void _startStopwatch() {
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      _remainingTime++;
+      onTick?.call(); // 스탑워치 업데이트를 알림
+    });
+  }
+
   void stop() {
     _timer?.cancel();
     _timer = null;
@@ -41,15 +58,25 @@ class TimerService {
 
   void reset() {
     stop();
-    _remainingTime = duration;
-    progress = 1.0;
+    if (mode == TimerMode.countdown) {
+      _remainingTime = duration;
+      progress = 1.0;
+    } else if (mode == TimerMode.stopwatch) {
+      _remainingTime = 0;
+    }
     onTick?.call(); // 리셋 후 상태 업데이트
   }
 
   String formatTime() {
     final minutes = (_remainingTime ~/ 60).toString().padLeft(2, '0');
     final secs = (_remainingTime % 60).toString().padLeft(2, '0');
-    return "$minutes:$secs";
+
+    if (mode == TimerMode.stopwatch) {
+      final milliseconds = (_remainingTime % 1000 ~/ 10).toString().padLeft(2, '0');
+      return "$minutes:$secs.$milliseconds";
+    } else {
+      return "$minutes:$secs";
+    }
   }
 
   void dispose() {
