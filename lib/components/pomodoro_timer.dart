@@ -1,4 +1,4 @@
-//TODO: 타이머 동기화 해결하기. 원형 그래프 줄어드는거 가시성 명확하게 수정하기.
+
 import 'package:chack_project/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -57,7 +57,7 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
         const SizedBox(height: 40),
         _buildPageIndicator(),
         Container(
-          height: 500,
+          height: 480,
           child: PageView(
             controller: _pageController,
             onPageChanged: (index) {
@@ -76,7 +76,6 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
             ],
           ),
         ),
-        const SizedBox(height: 10),
         buildSelectBook(context),
         const SizedBox(height: 20),
       ],
