@@ -12,7 +12,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+  final _nicknameController = TextEditingController();
+  final _birthDateController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -23,7 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void dispose() {
-    _nameController.dispose();
+    _nicknameController.dispose();
+    _birthDateController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -141,9 +143,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     try {
       await _authService.signUpWithEmail(
-        name: _nameController.text,
+        nickname: _nicknameController.text,
         email: _emailController.text,
         password: _passwordController.text,
+        birthDate: _birthDateController.text,
       );
 
       if (!mounted) return;
@@ -152,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     } catch (e) {
       if (!mounted) return;
-      
+
       setState(() {
         _hasError = true;
         _errorMessage = e.toString();
@@ -176,6 +179,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2000), // 초기 날짜
+      firstDate: DateTime(1900), // 선택 가능한 가장 이른 날짜
+      lastDate: DateTime.now(), // 현재 날짜까지  
+      locale: const Locale('ko', 'KR'),
+    );
+    if (picked != null) {
+      setState(() {
+        _birthDateController.text = "${picked.toLocal()}".split(' ')[0];
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,7 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 80),
-                  
+
                   Text.rich(
                     TextSpan(
                       children: [
@@ -211,16 +229,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                     ),
                   ),
-                  
+
                   const SizedBox(height: 40),
 
                   CustomTextField(
-                    hintText: '이름',
-                    controller: _nameController,
+                    hintText: '닉네임',
+                    controller: _nicknameController,
                     hasError: _hasError,
                   ),
                   const SizedBox(height: 10),
-                  
+
+                  // 생년월일 필드 수정: 달력 선택 가능
+                  GestureDetector(
+                    onTap: () => _selectDate(context),
+                    child: AbsorbPointer(
+                      child: CustomTextField(
+                        hintText: '생년월일 (예: 1990-01-01)',
+                        controller: _birthDateController,
+                        hasError: _hasError,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '생년월일을 입력해주세요.';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
                   CustomTextField(
                     hintText: '이메일 주소',
                     controller: _emailController,
@@ -237,7 +274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  
+
                   CustomTextField(
                     hintText: '비밀번호',
                     obscureText: true,
@@ -254,7 +291,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  
+
                   CustomTextField(
                     hintText: '비밀번호 확인',
                     obscureText: true,
@@ -267,7 +304,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  
+
                   if (_hasError) ...[
                     const SizedBox(height: 16),
                     Padding(
@@ -283,7 +320,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ],
-                  
+
                   const SizedBox(height: 45),
 
                   CustomButton(

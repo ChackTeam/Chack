@@ -6,6 +6,8 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    // The Flutter Plugin Loader must be applied before the Flutter Gradle Plugin.
+    id 'org.jetbrains.kotlin.android' version '1.8.22'
 }
 
 def localProperties = new Properties()

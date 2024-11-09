@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService();
   bool _isLoading = false;
   bool _hasError = false;
+  bool _isEmailVerificationNeeded = false;
   String _errorMessage = '';
 
   @override
@@ -49,24 +50,33 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
       _hasError = false;
       _errorMessage = '';
+      _isEmailVerificationNeeded = false;
     });
 
     try {
-      await _authService.signInWithEmail(
+      final userCredential = await _authService.signInWithEmail(
         email: _idController.text,
         password: _passwordController.text,
       );
 
       if (!mounted) return;
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/home',
-        (route) => false,
-      );
+      if (!userCredential.user!.emailVerified) {
+        setState(() {
+          _isEmailVerificationNeeded = true;
+          _errorMessage = '아이디/패스워드가 틀렸습니다';
+        });
+        await _authService.signOut();
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/home',
+          (route) => false,
+        );
+      }
     } catch (e) {
       if (!mounted) return;
-      
+
       setState(() {
         _hasError = true;
         _errorMessage = e.toString();
@@ -80,39 +90,26 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Google 로그인
-  Future<void> _signInWithGoogle() async {
-    setState(() {
-      _isLoading = true;
-      _hasError = false;
-      _errorMessage = '';
-    });
-
+  // 인증 메일 재전송
+  Future<void> _resendVerificationEmail() async {
     try {
-      final credential = await _authService.signInWithGoogle();
-
-      if (!mounted) return;
-
-      if (credential != null) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/home',
-          (route) => false,
-        );
-      }
+      await _authService.resendVerificationEmail(
+        _idController.text,
+        _passwordController.text,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('인증 메일이 재발송되었습니다. 메일함을 확인해주세요.'),
+          backgroundColor: AppColors.pointColor,
+        ),
+      );
     } catch (e) {
-      if (!mounted) return;
-      
-      setState(() {
-        _hasError = true;
-        _errorMessage = e.toString();
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -125,7 +122,40 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+Future<void> _signInWithGoogle() async {
+  setState(() {
+    _isLoading = true;
+    _hasError = false;
+    _errorMessage = '';
+  });
 
+  try {
+    final credential = await _authService.signInWithGoogle();
+
+    if (!mounted) return;
+
+    if (credential != null) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/home',
+        (route) => false,
+      );
+    }
+  } catch (e) {
+    if (!mounted) return;
+    
+    setState(() {
+      _hasError = true;
+      _errorMessage = e.toString();
+    });
+  } finally {
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 80),
-                      
+
                       // 타이틀과 로고
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
@@ -166,9 +196,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      
+
                       const SizedBox(height: 60),
-                      
+
                       // 이메일 입력 필드
                       CustomTextField(
                         hintText: '아이디',
@@ -187,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       const SizedBox(height: 10),
-                      
+
                       // 비밀번호 입력 필드
                       CustomTextField(
                         hintText: '비밀번호',
@@ -205,7 +235,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      
+
+                      // 이메일 인증 재전송 메시지
+                      if (_isEmailVerificationNeeded)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: GestureDetector(
+                            onTap: _resendVerificationEmail,
+                            child: const Text(
+                              '이메일 인증이 필요합니다. 인증 메일이 안왔나요? 인증메일 재전송',
+                              style: TextStyle(
+                                color: AppColors.pointColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+
                       // 에러 메시지
                       if (_hasError) ...[
                         const SizedBox(height: 16),
@@ -222,17 +268,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ],
-                      
+
                       const SizedBox(height: 45),
-                      
+
                       // 로그인 버튼
                       CustomButton(
                         text: '로그인하기',
                         onPressed: _isLoading ? null : _signInWithEmailAndPassword,
                       ),
-                      
+
                       const SizedBox(height: 30),
-                      
+
                       // 보조 링크들
                       SizedBox(
                         height: 40,
@@ -271,9 +317,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      
+
                       const SizedBox(height: 30),
-                      
+
                       // Google 로그인 버튼
                       SocialLoginButton(
                         text: 'Google로 시작하기',

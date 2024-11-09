@@ -20,8 +20,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
+            color: Colors.black.withOpacity(0.07),
+            blurRadius: 20,
             offset: const Offset(0, -5),
           ),
         ],
@@ -73,7 +73,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
   }) {
     return BottomNavigationBarItem(
       icon: Padding(
-        padding: const EdgeInsets.only(bottom: 4),
+        padding: const EdgeInsets.only(
+          top: 15,
+          bottom: 7,
+        ),
         child: SvgPicture.asset(
           icon,
           colorFilter: ColorFilter.mode(
@@ -83,10 +86,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
       ),
       activeIcon: Padding(
-        padding: const EdgeInsets.only(bottom: 4),
+        padding: const EdgeInsets.only(
+          top: 15,
+          bottom: 7,
+        ),
         child: SvgPicture.asset(
           icon,
-          colorFilter: ColorFilter.mode(
+          colorFilter: const ColorFilter.mode(
             AppColors.pointColor,
             BlendMode.srcIn,
           ),
