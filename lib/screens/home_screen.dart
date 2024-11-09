@@ -8,6 +8,7 @@ import '../constants/colors.dart';
 import '../constants/text_styles.dart';
 import '../components/pomodoro_timer.dart';
 import '../screens/profile_screen.dart';
+import '../screens/bookshelf_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -87,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   children: const [
                     _HomeTab(),
-                    _BookshelfTab(),
+                    BookshelfScreen(), // BookshelfScreen으로 수정합니다.
                     _TimerTab(),
                     _StatisticsTab(),
                   ],
@@ -139,28 +140,6 @@ class _HomeTab extends StatelessWidget {
             child: BookRecommendationList(),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// 서재 탭
-class _BookshelfTab extends StatelessWidget {
-  const _BookshelfTab();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.backgroundColor,
-      child: const Center(
-        child: Text(
-          '서재',
-          style: TextStyle(
-            fontSize: 24,
-            fontFamily: 'SUITE',
-            fontWeight: FontWeight.w600,
-          ),
-        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import '../services/recommended_books_service.dart';
 import '../services/location_service.dart';
 import '../models/book_model.dart';
@@ -7,7 +7,7 @@ import '../constants/colors.dart';
 import './book_recommendation_card.dart';
 
 class BookRecommendationList extends StatefulWidget {
-  const BookRecommendationList({Key? key}) : super(key: key);
+  const BookRecommendationList({super.key});
 
   @override
   _BookRecommendationListState createState() => _BookRecommendationListState();
@@ -15,10 +15,11 @@ class BookRecommendationList extends StatefulWidget {
 
 class _BookRecommendationListState extends State<BookRecommendationList> {
   final PageController _pageController = PageController();
-  final RecommendedBooksService _recommendedBooksService = RecommendedBooksService();
+  final RecommendedBooksService _recommendedBooksService =
+      RecommendedBooksService();
   final LocationService _locationService = LocationService();
 
-  List<Book> _books = [];
+  final List<Book> _books = [];
   bool _isLoading = false;
   String? _error;
   int _currentPage = 0;
@@ -48,12 +49,14 @@ class _BookRecommendationListState extends State<BookRecommendationList> {
 
     try {
       final userLocation = await _locationService.getCurrentLocation();
-      final newBooks = await _recommendedBooksService.fetchRecommendedBooks(userLocation);
-      
+      final newBooks =
+          await _recommendedBooksService.fetchRecommendedBooks(userLocation);
+
       if (mounted) {
         setState(() {
           final uniqueBooks = newBooks.where((newBook) {
-            return !_books.any((existingBook) => existingBook.isbn == newBook.isbn);
+            return !_books
+                .any((existingBook) => existingBook.isbn == newBook.isbn);
           }).toList();
 
           _books.addAll(uniqueBooks);
