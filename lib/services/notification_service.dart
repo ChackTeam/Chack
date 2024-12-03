@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +14,9 @@ class NotificationService {
 
   static Future<void> initialize() async {
     if (_initialized) return;
+
+      // 알림 권한 요청
+    await requestNotificationPermission();
 
     const androidSettings = AndroidInitializationSettings('@mipmap/ic_chack');
     const iosSettings = DarwinInitializationSettings(
@@ -37,10 +41,20 @@ class NotificationService {
     if (Platform.isAndroid) {
       final androidImplementation = _notifications.resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>();
-      await androidImplementation?.requestPermission();
     }
     
     _initialized = true;
+  }
+
+  static Future<void> requestNotificationPermission() async {
+    if (Platform.isAndroid && (await Permission.notification.isDenied)) {
+      final status = await Permission.notification.request();
+      if (status == PermissionStatus.granted) {
+        print("알림 권한이 허용되었습니다.");
+      } else {
+        print("알림 권한이 거부되었습니다.");
+      }
+    }
   }
 
   static Future<void> _onDidReceiveLocalNotification(

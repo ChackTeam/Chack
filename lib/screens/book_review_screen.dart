@@ -176,21 +176,18 @@ class ReviewWritingScreenState extends State<ReviewWritingScreen> {
 
           // 스크롤 가능한 콘텐츠
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 리뷰 카드 - 콜백 추가
-                  BookReviewCard(
-                    userId: widget.userId,
-                    isbn: widget.isbn,
-                    onReviewSaved: _onReviewSaved,
-                  ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 리뷰 카드 - 콜백 추가
+                BookReviewCard(
+                  userId: widget.userId,
+                  isbn: widget.isbn,
+                  onReviewSaved: _onReviewSaved,
+                ),
 
-                  const SizedBox(height: 20),
-                ],
-              ),
+                const SizedBox(height: 20),
+              ],
             ),
           ),
         ],

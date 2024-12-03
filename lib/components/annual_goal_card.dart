@@ -246,7 +246,8 @@ class AnnualGoalCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 22, horizontal: 28),
                 child: Column(
                   children: [
                     // 첫 번째 Row: 텍스트와 아이콘
@@ -271,47 +272,51 @@ class AnnualGoalCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 12),
                     // 두 번째 Row: 진행률과 읽은 책/목표 책 표시
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         // 읽은 책 수와 목표 책 수
-                        RichText(
-                          text: TextSpan(
-                            text: '$readBooks',
+                        Transform.translate(
+                          offset: const Offset(0, 6),
+                          child: Text(
+                            '$readBooks',
                             style: const TextStyle(
-                              fontSize: 24,
+                              fontSize: 36,
                               fontWeight: FontWeight.w800,
-                              color: Color(0xFF58BFAE),
-                              fontFamily: 'SUITE',
+                              color: AppColors.pointColor,
                             ),
-                            children: [
-                              TextSpan(
-                                text: '/$annualGoal권',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                  fontFamily: 'SUITE',
-                                ),
-                              ),
-                            ],
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        // 편집 아이콘
-                        GestureDetector(
-                          onTap: () => _showGoalEditDialog(context),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.black.withOpacity(0.15),
-                            size: 24,
-                          ),
+                        const SizedBox(width: 7),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '/$annualGoal권',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            // 편집 아이콘
+                            GestureDetector(
+                              onTap: () => _showGoalEditDialog(context),
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.black.withOpacity(0.15),
+                                size: 20,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    const SizedBox(height: 5),
+                    const SizedBox(height: 10),
                     // 진행률 바
                     Stack(
                       alignment: Alignment.centerLeft,
@@ -319,7 +324,7 @@ class AnnualGoalCard extends StatelessWidget {
                         // 진행률 배경 바
                         Container(
                           width: double.infinity,
-                          height: 10,
+                          height: 8,
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(4),
@@ -329,7 +334,7 @@ class AnnualGoalCard extends StatelessWidget {
                         FractionallySizedBox(
                           widthFactor: progress.clamp(0.0, 1.0),
                           child: Container(
-                            height: 10,
+                            height: 8,
                             decoration: BoxDecoration(
                               color: AppColors.pointColor,
                               borderRadius: BorderRadius.circular(7),
