@@ -400,25 +400,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         const SizedBox(height: 3),
                         Row(
                           children: [
-                            Expanded(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      _libraryName,
-                                      style: const TextStyle(fontSize: 14),
-                                    ),
-                                    const SizedBox(width: 7),
-                                    Text(
-                                      '($_libraryDistance)',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.black.withOpacity(0.4)),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            Text(
+                              _libraryName,
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                            const SizedBox(width: 7),
+                            Text(
+                              '($_libraryDistance)',
+                              style: const TextStyle(fontSize: 14),
                             ),
                             const SizedBox(width: 10),
                             Container(

@@ -34,6 +34,7 @@ class SearchInputBar extends StatelessWidget {
 
             Expanded(
               child: Container(
+                height: 44,
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.05),

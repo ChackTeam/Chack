@@ -108,43 +108,22 @@ class _BookSelectionModalState extends State<BookSelectionModal> {
             ),
           ),
           // 검색 입력 필드
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            decoration: ShapeDecoration(
-              color: Colors.black.withOpacity(0.05),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(22),
+          TextField(
+            decoration: InputDecoration(
+              hintText: '읽고 싶은 책을 알려주세요',
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
               ),
+              filled: true,
+              fillColor: Colors.grey[200],
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: '기록할 책을 알려주세요',
-                      hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.4),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      filled: true,
-                      fillColor: Colors.transparent,
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        _searchQuery = value; // 검색어 업데이트
-                      });
-                    },
-                  ),
-                ),
-                Icon(
-                  Icons.search,
-                  size: 20,
-                  color: Colors.black.withOpacity(0.4),
-                ),
-                const SizedBox(width: 5)
-              ],
-            ),
+            onChanged: (value) {
+              setState(() {
+                _searchQuery = value; // 검색어 업데이트
+              });
+            },
           ),
           const SizedBox(height: 16),
           // 책 리스트 표시

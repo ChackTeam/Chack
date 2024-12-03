@@ -23,11 +23,7 @@ class StopwatchPage extends StatefulWidget {
   _StopwatchPageState createState() => _StopwatchPageState();
 }
 
-class _StopwatchPageState extends State<StopwatchPage>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true; // 상태 유지 활성화
-
+class _StopwatchPageState extends State<StopwatchPage> {
   final BookReadingTimeService _readingTimeService = BookReadingTimeService();
   String elapsedTimeText = '00:00';
   Map<String, String>? selectedBook;
@@ -205,97 +201,95 @@ class _StopwatchPageState extends State<StopwatchPage>
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-          child: const Align(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 '스톱워치',
                 style: AppTextStyles.titleStyle,
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.stopwatchService.formatTime(),
-                style: const TextStyle(
-                  fontFamily: "SUITE",
-                  fontSize: 44,
-                  fontWeight: FontWeight.w800,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  widget.stopwatchService.formatTime(),
+                  style: const TextStyle(
+                    fontFamily: "SUITE",
+                    fontSize: 44,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      IconButton(
-                        icon: SvgPicture.asset(
-                          AppIcons.restartIcon,
-                          width: 28,
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        IconButton(
+                          icon: SvgPicture.asset(AppIcons.restartIcon),
+                          iconSize: 30,
+                          onPressed: _resetStopwatch,
                         ),
-                        onPressed: _resetStopwatch,
-                      ),
-                      const Text(
-                        "다시 시작",
-                        style: TextStyle(
-                          fontFamily: "SUITE",
-                          fontSize: 12,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w600,
+                        const Text(
+                          "다시 시작",
+                          style: TextStyle(
+                            fontFamily: "SUITE",
+                            fontSize: 12,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 40),
-                  Column(
-                    children: [
-                      IconButton(
-                        icon: SvgPicture.asset(
-                          widget.stopwatchService.isRunning
-                              ? AppIcons.pauseIcon
-                              : AppIcons.startIcon,
-                          width: 20,
+                      ],
+                    ),
+                    const SizedBox(width: 40),
+                    Column(
+                      children: [
+                        IconButton(
+                          icon: SvgPicture.asset(
+                            widget.stopwatchService.isRunning
+                                ? AppIcons.pauseIcon
+                                : AppIcons.startIcon,
+                          ),
+                          iconSize: 30,
+                          onPressed: _toggleStopwatch,
                         ),
-                        onPressed: _toggleStopwatch,
-                      ),
-                      Text(
-                        widget.stopwatchService.isRunning ? "정지" : "시작",
-                        style: const TextStyle(
-                          fontFamily: "SUITE",
-                          fontSize: 12,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w600,
+                        Text(
+                          widget.stopwatchService.isRunning ? "정지" : "시작",
+                          style: const TextStyle(
+                            fontFamily: "SUITE",
+                            fontSize: 12,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-          child: BookSelectionWidget(
-            elapsedTimeText: elapsedTimeText,
-            onBookSelected: _onBookSelected,
-            userId: widget.userId,
-            timerService: widget.stopwatchService,
-            stopwatchService: widget.stopwatchService, // StopwatchService 전달
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+            child: BookSelectionWidget(
+              elapsedTimeText: elapsedTimeText,
+              onBookSelected: _onBookSelected,
+              userId: widget.userId,
+              timerService: widget.stopwatchService,
+              stopwatchService: widget.stopwatchService, // StopwatchService 전달
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
