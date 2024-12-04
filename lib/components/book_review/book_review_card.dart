@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../constants/colors.dart';
-import '../../constants/icons.dart';
 import '../../services/book_review_service.dart';
 
 class BookReviewCard extends StatefulWidget {
@@ -10,11 +8,11 @@ class BookReviewCard extends StatefulWidget {
   final VoidCallback onReviewSaved;
 
   const BookReviewCard({
-    super.key,
+    Key? key,
     required this.userId,
     required this.isbn,
     required this.onReviewSaved,
-  });
+  }) : super(key: key);
 
   @override
   _BookReviewCardState createState() => _BookReviewCardState();
@@ -89,7 +87,7 @@ class _BookReviewCardState extends State<BookReviewCard> {
           _reviewText = _controller.text;
           _isEditing = false;
         });
-        widget.onReviewSaved(); // 저장 완료 후 콜백 호출
+        widget.onReviewSaved();  // 저장 완료 후 콜백 호출
       }
     } catch (e) {
       if (mounted) {
@@ -144,192 +142,101 @@ class _BookReviewCardState extends State<BookReviewCard> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            decoration: BoxDecoration(
-              color: AppColors.pointColor.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                SvgPicture.asset(
-                  AppIcons.chackIcon,
-                  width: 16,
-                  colorFilter: const ColorFilter.mode(
-                    AppColors.pointColor,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  '책을 읽고 느낀 점을 자유롭게 작성해 보세요.',
-                  style: TextStyle(
-                    color: AppColors.pointColor,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-            decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Card(
+      color: Colors.grey[100],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      '별점',
+                      '내 별점',
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
-                        fontSize: 18,
+                        fontFamily: "SUITE",
+                        fontSize: 20,
                         color: AppColors.primary,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          if (_isEditing) {
-                            _saveReview(); // 저장 로직 호출
-                          } else {
-                            setState(() {
-                              _isEditing = true;
-                            });
-                          }
-                        });
-                      },
-                      icon: Icon(
-                        _isEditing ? Icons.check : Icons.edit,
-                        color: _isEditing
-                            ? AppColors.pointColor
-                            : Colors.black.withOpacity(0.2),
-                        size: 20,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                    const SizedBox(width: 8),
                     Row(
-                      children: List.generate(
-                        5,
-                        (index) {
-                          return Row(
-                            children: [
-                              GestureDetector(
-                                onTap: _isEditing
-                                    ? () {
-                                        setState(() {
-                                          _rating = index + 1;
-                                        });
-                                      }
-                                    : null,
-                                child: index < _rating
-                                    ? SvgPicture.asset(
-                                        AppIcons.starIcon,
-                                        width: 18,
-                                        colorFilter: const ColorFilter.mode(
-                                          AppColors.pointColor,
-                                          BlendMode.srcIn,
-                                        ),
-                                      )
-                                    : SvgPicture.asset(
-                                        AppIcons.starIcon,
-                                        width: 18,
-                                        colorFilter: ColorFilter.mode(
-                                          Colors.black.withOpacity(0.1),
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                              ),
-                              if (index < 4)
-                                const SizedBox(width: 6), // 별 사이의 간격
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Column(
-                      children: [
-                        const SizedBox(height: 2),
-                        Text(
-                          '$_rating점', // 현재 별점과 최대 별점 표시
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black.withOpacity(0.3),
+                      children: List.generate(5, (index) {
+                        return GestureDetector(
+                          onTap: _isEditing
+                              ? () {
+                                  setState(() {
+                                    _rating = index + 1;
+                                  });
+                                }
+                              : null,
+                          child: Icon(
+                            index < _rating ? Icons.star : Icons.star_border,
+                            color: AppColors.pointColor,
+                            size: 24,
                           ),
-                        ),
-                      ],
+                        );
+                      }),
                     ),
                   ],
                 ),
-                Divider(
-                  color: Colors.black.withOpacity(0.1), // 선 색상
-                  thickness: 1, // 선 두께
-                  height: 50, // 선 위아래 공간
-                ),
-                const Text(
-                  '독후감',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 18,
-                    color: AppColors.primary,
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (_isEditing) {
+                        _saveReview();  // 저장 로직 호출
+                      } else {
+                        setState(() {
+                          _isEditing = true;
+                        });
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    _isEditing ? Icons.check : Icons.edit,
+                    color: _isEditing ? Colors.teal : Colors.grey,
+                    size: 20,
                   ),
                 ),
-                const SizedBox(height: 8),
-                _isEditing
-                    ? TextField(
-                        controller: _controller,
-                        maxLines: 3,
-                        decoration: InputDecoration(
-                          hintText: '  독후감을 작성하세요.',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black.withOpacity(0.3),
-                          ),
-                          fillColor: Colors.transparent,
-                          filled: true,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Colors.black.withOpacity(0.1)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                                color: Colors.black.withOpacity(0.1)),
-                          ),
-                        ),
-                      )
-                    : Text(
-                        _reviewText,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.primary.withOpacity(0.6),
-                        ),
-                      ),
-                const SizedBox(height: 15),
               ],
             ),
-          ),
-          const SizedBox(height: 50),
-        ],
+            const SizedBox(height: 16),
+
+            _isEditing
+                ? TextField(
+                    controller: _controller,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      hintText: '독후감을 작성하세요.',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: AppColors.unreadColor),
+                      ),
+                    ),
+                  )
+                : Text(
+                    _reviewText,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: "SUITE",
+                      color: AppColors.primary,
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }

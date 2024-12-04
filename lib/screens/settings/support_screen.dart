@@ -235,16 +235,16 @@ class SupportScreen extends StatelessWidget {
                 ),
                 _buildFAQItem(
                   question: '책을 검색할 수 없어요.',
-                  answer: '책의 ISBN을 정확하게 입력했는지 확인해 주세요. '
+                  answer: 'ISBN을 정확하게 입력했는지 확인해주세요. '
                       'ISBN은 책 뒷면의 바코드 아래에 있는 13자리 숫자입니다. '
-                      '검색이 계속 되지 않으면 [프로필] > [도움말] > [고객지원]으로 문의해 주세요.',
+                      '검색이 계속 되지 않는다면 고객센터로 문의해주세요.',
                   icon: Icons.search,
                 ),
                 _buildFAQItem(
                   question: '독서 기록이 사라졌어요.',
-                  answer: '독서 기록은 자동으로 저장되니 안심하세요. '
-                      '기록이 보이지 않을 때는 인터넷 연결 상태를 확인해 보시고, '
-                      '문제가 지속되면 [프로필] > [도움말] > [고객지원]으로 문의해 주세요.',
+                  answer: '독서 기록은 자동으로 저장되며 삭제되지 않습니다. '
+                      '기록이 보이지 않는다면 인터넷 연결을 확인해보시고, '
+                      '문제가 지속되면 고객센터로 문의해주세요.',
                   icon: Icons.history,
                 ),
                 _buildFAQItem(
