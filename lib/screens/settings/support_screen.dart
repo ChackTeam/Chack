@@ -12,7 +12,7 @@ class SupportScreen extends StatelessWidget {
       path: 'moejihong@gmail.com',
       queryParameters: {
         'subject': '[책읽는체크] 문의사항',
-        'body': '문의 내용을 작성해주세요.\n\n'
+        'body': '문의 내용을 작성해 주세요.\n\n'
             '-------------------------------\n'
             '앱 버전: 1.0.0\n'
             '기기: ${Theme.of(context).platform}\n'
@@ -229,29 +229,28 @@ class SupportScreen extends StatelessWidget {
               [
                 _buildFAQItem(
                   question: '독서 타이머는 어떻게 사용하나요?',
-                  answer: '책을 읽을 때 타이머 버튼을 누르면 자동으로 시간이 측정됩니다. '
-                      '측정된 시간은 자동으로 저장되며, 일일 독서 통계에 반영됩니다. '
-                      '휴식이 필요할 때는 일시정지 버튼을 눌러주세요.',
+                  answer: '독서 타이머는 책을 읽는 시간을 자동으로 기록하여 일일 독서 통계에 반영합니다. '
+                      '타이머 버튼을 눌러 시작하고, 휴식이 필요할 때는 일시 정지 버튼을 눌러 주세요. ',
                   icon: Icons.timer,
                 ),
                 _buildFAQItem(
                   question: '책을 검색할 수 없어요.',
-                  answer: 'ISBN을 정확하게 입력했는지 확인해주세요. '
+                  answer: '책의 ISBN을 정확하게 입력했는지 확인해 주세요. '
                       'ISBN은 책 뒷면의 바코드 아래에 있는 13자리 숫자입니다. '
-                      '검색이 계속 되지 않는다면 고객센터로 문의해주세요.',
+                      '검색이 계속 되지 않으면 [프로필] > [도움말] > [고객지원]으로 문의해 주세요.',
                   icon: Icons.search,
                 ),
                 _buildFAQItem(
                   question: '독서 기록이 사라졌어요.',
-                  answer: '독서 기록은 자동으로 저장되며 삭제되지 않습니다. '
-                      '기록이 보이지 않는다면 인터넷 연결을 확인해보시고, '
-                      '문제가 지속되면 고객센터로 문의해주세요.',
+                  answer: '독서 기록은 자동으로 저장되니 안심하세요. '
+                      '기록이 보이지 않을 때는 인터넷 연결 상태를 확인해 보시고, '
+                      '문제가 지속되면 [프로필] > [도움말] > [고객지원]으로 문의해 주세요.',
                   icon: Icons.history,
                 ),
                 _buildFAQItem(
                   question: '알림이 오지 않아요.',
-                  answer: '설정 > 알림 설정에서 알림이 켜져 있는지 확인해주세요. '
-                      '휴대폰의 알림 설정에서도 앱 알림이 허용되어 있어야 합니다.',
+                  answer: '[프로필] > [알림 설정]에서 알림이 활성화되어 있는지 확인해 주세요. '
+                      '휴대폰의 알림 설정에서도 앱의 알림이 허용되어 있어야 합니다.',
                   icon: Icons.notifications,
                 ),
               ],
@@ -268,7 +267,7 @@ class SupportScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 _buildContactButton(
                   title: '버그 리포트',
-                  description: 'GitHub Issues에서 문제를 제보해주세요',
+                  description: 'GitHub Issues에서 문제를 제보해 주세요',
                   icon: Icons.bug_report,
                   onTap: _openGitHubIssues,
                 ),
