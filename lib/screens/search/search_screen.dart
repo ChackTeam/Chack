@@ -102,6 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: SearchInputBar(
           controller: searchController,
           onSearch: () => _onSearch(searchController.text),
+          onBack: () => Navigator.pop(context), // 뒤로가기 기능 추가
         ),
       ),
       body: Padding(

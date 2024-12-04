@@ -6,11 +6,13 @@ import '../constants/icons.dart';
 class SearchInputBar extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback onSearch;
+  final VoidCallback? onBack;  // 추가
 
   const SearchInputBar({
     super.key,
     required this.controller,
     required this.onSearch,
+    this.onBack,  // 추가
   });
 
   @override
@@ -22,12 +24,15 @@ class SearchInputBar extends StatelessWidget {
         ),
         Row(
           children: [
-            // 로고
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: SvgPicture.asset(
-                AppIcons.chackIcon,
-                width: 24,
+            // 로고를 GestureDetector로 감싸서 클릭 가능하게 함
+            GestureDetector(
+              onTap: onBack,  // 뒤로가기 기능 추가
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: SvgPicture.asset(
+                  AppIcons.chackIcon,
+                  width: 24,
+                ),
               ),
             ),
             const SizedBox(width: 10),
