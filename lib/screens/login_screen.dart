@@ -1,5 +1,6 @@
 import 'package:chack_project/screens/collect_birth_date_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../services/authentication_service.dart';
 import '../components/custom_text_field.dart';
@@ -45,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // 이메일/비밀번호 로그인
   Future<void> _signInWithEmailAndPassword() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -64,31 +64,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (!mounted) return;
 
-      if (!userCredential.user!.emailVerified) {
-        setState(() {
-          _isEmailVerificationNeeded = true;
-          _errorMessage = '이메일 인증이 완료되지 않았습니다.';
-        });
-        await _authService.signOut();
-      } else {
-        final uid = userCredential.user!.uid;
-        final hasBirthDate = await _authService.isBirthDateAvailable(uid);
+      final uid = userCredential.user!.uid;
+      final hasBirthDate = await _authService.isBirthDateAvailable(uid);
 
-        // 등록된 생년월일이 있으면 홈 화면으로 이동
-        if (hasBirthDate) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            '/home',
-            (route) => false,
-          );
-        } else {
-          // 등록된 생년월일이 없으면 생년월일 입력 화면으로 이동
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const CollectBirthDateScreen()),
-          );
-        }
+      if (hasBirthDate) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/home',
+          (route) => false,
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CollectBirthDateScreen(),
+          ),
+        );
       }
     } catch (e) {
       if (!mounted) return;
@@ -96,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         _hasError = true;
         _errorMessage = e.toString();
+        _isEmailVerificationNeeded = e.toString().contains('이메일 인증이 완료되지 않았습니다');
       });
     } finally {
       if (mounted) {
@@ -106,19 +98,22 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // 인증 메일 재전송
   Future<void> _resendVerificationEmail() async {
     try {
       await _authService.resendVerificationEmail(
         _idController.text,
         _passwordController.text,
       );
+      if (!mounted) return;
+
       CustomAlertBanner.show(
         context,
-        message: '인증 메일이 재발송되었습니다. 메일함을 확인해주세요.',
+        message: '인증메일이 발송되었습니다. 메일함을 확인해주세요.',
         iconColor: AppColors.pointColor,
       );
     } catch (e) {
+      if (!mounted) return;
+
       CustomAlertBanner.show(
         context,
         message: e.toString(),
@@ -127,17 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // 회원가입 화면으로 이동
-  void _navigateToSignup() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SignUpScreen(),
-      ),
-    );
-  }
-
-  // 구글 로그인
   Future<void> _signInWithGoogle() async {
     setState(() {
       _isLoading = true;
@@ -151,11 +135,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       if (credential != null) {
-        // 구글 로그인 성공 후 생년월일 확인
         final uid = credential.user!.uid;
         final hasBirthDate = await _authService.isBirthDateAvailable(uid);
 
-        // 등록된 생년월일이 있으면 홈 화면으로 이동
         if (hasBirthDate) {
           Navigator.pushNamedAndRemoveUntil(
             context,
@@ -163,11 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
             (route) => false,
           );
         } else {
-          // 등록된 생년월일이 없으면 생년월일 입력 화면으로 이동
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const CollectBirthDateScreen()),
+              builder: (context) => const CollectBirthDateScreen(),
+            ),
           );
         }
       }
@@ -247,6 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
+
                       const SizedBox(height: 10),
 
                       // 비밀번호 입력 필드
@@ -267,36 +250,48 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
 
-                      // 이메일 인증 재전송 메시지
-                      if (_isEmailVerificationNeeded)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: GestureDetector(
-                            onTap: _resendVerificationEmail,
-                            child: const Text(
-                              '이메일 인증이 완료되지 않았습니다. 메일을 못 받으셨나요? 재전송',
-                              style: TextStyle(
-                                color: AppColors.pointColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      // 에러 메시지
-                      if (_hasError) ...[
+                      // 에러 메시지 영역
+                      if (_hasError || _isEmailVerificationNeeded) ...[
                         const SizedBox(height: 16),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Text(
-                            _errorMessage,
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontSize: 14,
-                              fontFamily: 'SUITE',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          child: _isEmailVerificationNeeded 
+                              ? Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      const TextSpan(
+                                        text: '이메일 인증이 완료되지 않았습니다. 인증메일을 받지 못했나요? ',
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 14,
+                                          fontFamily: 'SUITE',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: '다시 받기',
+                                        style: const TextStyle(
+                                          color: AppColors.pointColor,
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 14,
+                                          fontFamily: 'SUITE',
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = _resendVerificationEmail,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Text(
+                                  _errorMessage,
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontFamily: 'SUITE',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                         ),
                       ],
 
@@ -305,8 +300,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // 로그인 버튼
                       CustomButton(
                         text: '로그인하기',
-                        onPressed:
-                            _isLoading ? null : _signInWithEmailAndPassword,
+                        onPressed: _isLoading ? null : _signInWithEmailAndPassword,
                       ),
 
                       const SizedBox(height: 30),
@@ -325,8 +319,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   MaterialPageRoute(
                                     builder: (context) => const FindAccountScreen(
                                       isFindPassword: false,
-                                    )
-                                  )
+                                    ),
+                                  ),
                                 ),
                               child: Text('아이디 찾기',
                                   style: AppTextStyles.subTextStyle),
@@ -346,8 +340,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   MaterialPageRoute(
                                     builder: (context) => const FindAccountScreen(
                                       isFindPassword: true,
-                                    )
-                                  )
+                                    ),
+                                  ),
                                 ),
                               child: Text('비밀번호 찾기',
                                   style: AppTextStyles.subTextStyle),
@@ -360,7 +354,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               endIndent: 10,
                             ),
                             TextButton(
-                              onPressed: _isLoading ? null : _navigateToSignup,
+                              onPressed: _isLoading 
+                                ? null 
+                                : () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUpScreen(),
+                                  ),
+                                ),
                               child: Text('회원가입',
                                   style: AppTextStyles.subTextStyle),
                             ),

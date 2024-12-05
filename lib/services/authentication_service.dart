@@ -1,5 +1,3 @@
-// services/authentication_service.dart
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,7 +18,7 @@ class AuthService {
         return '비활성화된 계정입니다.';
       case 'user-not-found':
       case 'wrong-password':
-        return '아이디/패스워드가 틀렸습니다.'; // 이메일 또는 비밀번호 오류일 경우
+        return '아이디/패스워드가 틀렸습니다.';
       case 'invalid-email':
         return '유효하지 않은 이메일 형식입니다.';
       case 'email-already-in-use':
@@ -56,10 +54,8 @@ class AuthService {
       );
 
       final String uid = credential.user!.uid;
-
       await credential.user?.updateDisplayName(nickname);
 
-      // Firestore에 사용자 데이터 저장
       await _firestore.collection('users').doc(uid).set({
         'uid': uid,
         'nickname': nickname,
@@ -68,7 +64,6 @@ class AuthService {
       });
 
       await credential.user?.sendEmailVerification();
-
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       print('Firebase Auth Error: ${e.code}');
@@ -92,20 +87,26 @@ class AuthService {
 
       if (!credential.user!.emailVerified) {
         await _auth.signOut();
-        throw '이메일 인증이 필요합니다. 메일함을 확인해주세요.';
+        throw '이메일 인증이 완료되지 않았습니다. 인증메일을 받지 못했나요? 다시 받기';
       }
 
       return credential;
     } on FirebaseAuthException catch (e) {
-      // 로그인 시 이메일 또는 비밀번호 오류는 특정 메시지로 출력
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        throw '아이디/패스워드가 틀렸습니다.';
-      }
       print('Firebase Auth Error: ${e.code}');
-      throw _getKoreanErrorMessage(e.code);
+      // 아이디/비밀번호 오류 특별 처리
+      if (e.code == 'user-not-found' || 
+          e.code == 'wrong-password' || 
+          e.code == 'invalid-credential') {
+        throw '아이디/비밀번호가 잘못되었습니다';
+      }
+      throw '로그인에 문제가 생겼습니다';
     } catch (e) {
       print('Sign In Error: $e');
-      throw '로그인 중 오류가 발생했습니다.';
+      // 이미 정의된 에러 메시지는 그대로 전달
+      if (e is String && e.contains('이메일 인증이 완료되지 않았습니다')) {
+        throw e;
+      }
+      throw '로그인에 문제가 생겼습니다';
     }
   }
 
@@ -166,7 +167,6 @@ class AuthService {
       if (user != null) {
         final userDoc = await _firestore.collection('users').doc(user.uid).get();
         if (!userDoc.exists) {
-          // Firestore에 사용자 데이터 저장
           await _firestore.collection('users').doc(user.uid).set({
             'uid': user.uid,
             'nickname': user.displayName ?? '사용자',
@@ -225,9 +225,8 @@ class AuthService {
     }
   }
 
-    Future<String> findEmail({required String nickname}) async {
+  Future<String> findEmail({required String nickname}) async {
     try {
-      // nickname으로 사용자 검색
       final querySnapshot = await _firestore
           .collection('users')
           .where('nickname', isEqualTo: nickname)
@@ -237,7 +236,6 @@ class AuthService {
         throw '해당 닉네임으로 가입된 계정을 찾을 수 없습니다.';
       }
 
-      // 이메일 주소 마스킹 처리 (예: te***@gmail.com)
       final email = querySnapshot.docs.first.data()['email'] as String;
       final maskedEmail = maskEmail(email);
       
@@ -263,7 +261,6 @@ class AuthService {
   // 비밀번호 재설정 이메일 발송
   Future<void> sendPasswordResetEmail({required String email}) async {
     try {
-      // 해당 이메일로 가입된 계정이 있는지 확인
       final querySnapshot = await _firestore
           .collection('users')
           .where('email', isEqualTo: email)
