@@ -81,7 +81,7 @@ dependencies:
   table_calendar: ^3.0.10
 
   # 알림을 위한 패키지
-  flutter_local_notifications: ^17.2.1
+  flutter_local_notifications: ^15.1.3
 
   # url_launcher 패키지
   url_launcher: ^6.2.5
