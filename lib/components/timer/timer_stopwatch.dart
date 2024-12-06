@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../constants/icons.dart';
-import '../../services/stopwatch_service.dart';
+import '../../services/stopwatch_timer_service.dart';
 import '../../services/reading_time_service.dart';
 import '../../components/timer/timer_select_book_button.dart';
 import '../../components/custom_alert_banner.dart';

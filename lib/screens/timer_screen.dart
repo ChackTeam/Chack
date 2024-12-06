@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/pomodoro_timer_service.dart';
-import '../services/stopwatch_service.dart';
+import '../services/stopwatch_timer_service.dart';
 import '../components/timer/timer_pomodoro.dart';
 import '../components/timer/timer_stopwatch.dart'; // StopwatchPage import 추가
 import '../components/timer/timer_page_indicator.dart';
