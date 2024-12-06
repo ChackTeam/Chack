@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../services/pomodoro_service.dart';
+import '../../services/pomodoro_timer_service.dart';
 
 class StopwatchService extends TimerService {
   int _elapsedSeconds = 0;

@@ -8,7 +8,7 @@ import '../../services/daily_reading_service.dart';
 import '../../components/custom_alert_banner.dart';
 import '../../constants/icons.dart';
 import '../../constants/text_styles.dart';
-import '../../services/pomodoro_service.dart';
+import '../../services/pomodoro_timer_service.dart';
 import '../../constants/colors.dart';
 
 class PomodoroPage extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../constants/icons.dart';
 import '../../constants/colors.dart';
 import '../../constants/text_styles.dart';
-import '../../services/pomodoro_service.dart';
+import '../../services/pomodoro_timer_service.dart';
 import '../../services/reading_time_service.dart';
 import '../../services/stopwatch_service.dart';
 import 'timer_select_book_menu.dart';
