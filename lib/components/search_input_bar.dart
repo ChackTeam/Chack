@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/colors.dart';
 import '../constants/icons.dart';
 
 class SearchInputBar extends StatelessWidget {

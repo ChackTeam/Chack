@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
+
 
 class BookReadingtimeCard extends StatelessWidget {
   final DateTime startedAt;
@@ -100,32 +100,6 @@ class BookReadingtimeCard extends StatelessWidget {
                 ),
               ],
             ),
-            /*
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  '소요 일수',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    
-                    fontSize: 14,
-                    color: AppColors.unreadColor,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  _formatDuration(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    
-                    fontSize: 20,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ],
-            ),
-            */
           ],
         ),
       ],

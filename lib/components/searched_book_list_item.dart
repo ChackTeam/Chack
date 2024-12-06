@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
 import '../../constants/bookcover_styles.dart';
 import '../screens/book_detail_screen.dart';
 
