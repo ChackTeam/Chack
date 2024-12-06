@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/book_recommendation_provider.dart';
-import '../../services/recommended_books_service.dart';
-import '../../services/book_cache_service.dart';
-import '../../services/location_service.dart';
-import 'book_recommendation_card.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:chack_project/providers/book_recommendation_provider.dart';
+
+import 'package:chack_project/components/book_recommendation/book_recommendation_card.dart';
+
+import 'package:chack_project/services/recommended_books_service.dart';
+import 'package:chack_project/services/book_cache_service.dart';
+import 'package:chack_project/services/location_service.dart';
 
 class BookRecommendationList extends StatefulWidget {
   final String userId;
@@ -100,8 +103,8 @@ class _BookRecommendationListState extends State<BookRecommendationList>
                   title: book.title,
                   author: book.author,
                   publisher: book.publisher,
-                  distance: book.closestLibrary ?? '정보 없음',
-                  availability: book.availability ?? '알 수 없음',
+                  distance: book.closestLibrary,
+                  availability: book.availability,
                   imageUrl: book.imageUrl,
                   description: book.description ?? '이 책에 대한 설명이 없습니다.',
                 ),

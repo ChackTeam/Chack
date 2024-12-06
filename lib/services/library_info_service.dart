@@ -1,10 +1,10 @@
 // providers/library_info_provider.dart
-
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
-import '../services/location_service.dart';
-import '../services/recommended_books_service.dart';
 import 'package:logger/logger.dart';
+
+import 'package:chack_project/services/location_service.dart';
+import 'package:chack_project/services/recommended_books_service.dart';
 
 class LibraryInfoProvider {
   final LocationService _locationService = LocationService();

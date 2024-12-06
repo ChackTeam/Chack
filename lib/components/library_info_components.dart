@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
-import '../services/location_service.dart';
-import '../services/recommended_books_service.dart';
 
-// components/library_info_component.dart
+import 'package:chack_project/services/location_service.dart';
+import 'package:chack_project/services/recommended_books_service.dart';
 
 class LibraryInfoWidget extends StatefulWidget {
   final String isbn;
   final RecommendedBooksService recommendedBooksService;
 
   const LibraryInfoWidget({
-    Key? key,
+    super.key,
     required this.isbn,
     required this.recommendedBooksService,
-  }) : super(key: key);
+  });
 
   @override
   State<LibraryInfoWidget> createState() => _LibraryInfoWidgetState();

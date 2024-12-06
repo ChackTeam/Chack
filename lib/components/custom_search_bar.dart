@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../constants/icons.dart';
-import '../constants/colors.dart';
+
+import 'package:chack_project/constants/icons.dart';
+import 'package:chack_project/constants/colors.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final VoidCallback? onTap;

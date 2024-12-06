@@ -2,16 +2,17 @@ import 'package:chack_project/screens/collect_birth_date_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../services/authentication_service.dart';
-import '../components/custom_text_field.dart';
-import '../components/primary_button.dart';
-import '../components/social_login_button.dart';
-import '../components/custom_alert_banner.dart';
-import '../constants/text_styles.dart';
-import '../constants/icons.dart';
-import '../constants/colors.dart';
-import 'signup_screen.dart';
-import 'find_account_screen.dart';
+
+import 'package:chack_project/components/custom_text_field.dart';
+import 'package:chack_project/components/primary_button.dart';
+import 'package:chack_project/components/social_login_button.dart';
+import 'package:chack_project/components/custom_alert_banner.dart';
+import 'package:chack_project/constants/text_styles.dart';
+import 'package:chack_project/constants/icons.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/screens/signup_screen.dart';
+import 'package:chack_project/screens/find_account_screen.dart';
+import 'package:chack_project/services/authentication_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -359,7 +360,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SignUpScreen(),
+                                    builder: (context) => const SignUpScreen(),
                                   ),
                                 ),
                               child: Text('회원가입',

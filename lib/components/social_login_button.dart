@@ -1,7 +1,8 @@
 // lib/components/social_login_button.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/colors.dart';
+
+import 'package:chack_project/constants/colors.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final String text;
@@ -9,11 +10,11 @@ class SocialLoginButton extends StatelessWidget {
   final VoidCallback? onPressed;  // nullable로 변경
 
   const SocialLoginButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.svgPath,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logger/logger.dart';
-import '../../components/search_input_bar.dart';
-import 'search_results_screen.dart';
-import '../../constants/colors.dart';
+
+import 'package:chack_project/components/search_input_bar.dart';
+
+import 'package:chack_project/constants/colors.dart';
+
+import 'package:chack_project/screens/search/search_results_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   final String userId; // 사용자 ID 추가

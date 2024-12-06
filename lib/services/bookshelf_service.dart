@@ -1,6 +1,7 @@
 // services/bookshelf_service.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/bookshelf_model.dart';
+
+import 'package:chack_project/models/bookshelf_model.dart';
 
 class BookshelfService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

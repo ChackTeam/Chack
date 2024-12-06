@@ -1,12 +1,12 @@
 // providers/book_recommendation_provider.dart
-
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
-import '../services/recommended_books_service.dart';
-import '../services/location_service.dart';
-import '../models/book_model.dart';
+
+import 'package:chack_project/services/recommended_books_service.dart';
+import 'package:chack_project/services/location_service.dart';
+import 'package:chack_project/models/book_model.dart';
 
 class BookRecommendationProvider with ChangeNotifier {
   final RecommendedBooksService _recommendedBooksService;
@@ -108,7 +108,7 @@ class BookRecommendationProvider with ChangeNotifier {
         const Duration(hours: 1),
         (_) async {
           final newPosition = await _locationService.getCurrentLocation(forceUpdate: true);
-          if (newPosition != null && _shouldUpdateLocation(newPosition)) {
+          if (_shouldUpdateLocation(newPosition)) {
             _currentPosition = newPosition;
             await _clearLibraryCache();
             await _updateLibraryInfo();

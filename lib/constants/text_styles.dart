@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+
+import 'package:chack_project/constants/colors.dart';
 
 class AppTextStyles {
   static const TextStyle titleStyle = TextStyle(

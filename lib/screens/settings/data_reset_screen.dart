@@ -81,7 +81,7 @@ class DataResetScreen extends StatelessWidget {
           }
         }
       } catch (e) {
-        print('Error resetting user data: $e');
+        // print('Error resetting user data: $e');
         if (context.mounted) {
           CustomAlertBanner.show(
             context,

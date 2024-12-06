@@ -66,10 +66,10 @@ class AuthService {
       await credential.user?.sendEmailVerification();
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
-      print('Firebase Auth Error: ${e.code}');
+      // print('Firebase Auth Error: ${e.code}');
       throw _getKoreanErrorMessage(e.code);
     } catch (e) {
-      print('Sign Up Error: $e');
+      // print('Sign Up Error: $e');
       throw '회원가입 중 오류가 발생했습니다.';
     }
   }
@@ -92,7 +92,7 @@ class AuthService {
 
       return credential;
     } on FirebaseAuthException catch (e) {
-      print('Firebase Auth Error: ${e.code}');
+      // print('Firebase Auth Error: ${e.code}');
       // 아이디/비밀번호 오류 특별 처리
       if (e.code == 'user-not-found' || 
           e.code == 'wrong-password' || 
@@ -101,7 +101,7 @@ class AuthService {
       }
       throw '로그인에 문제가 생겼습니다';
     } catch (e) {
-      print('Sign In Error: $e');
+      // print('Sign In Error: $e');
       // 이미 정의된 에러 메시지는 그대로 전달
       if (e is String && e.contains('이메일 인증이 완료되지 않았습니다')) {
         throw e;
@@ -121,10 +121,10 @@ class AuthService {
       await credential.user?.sendEmailVerification();
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
-      print('Resend Verification Error: ${e.code}');
+      // print('Resend Verification Error: ${e.code}');
       throw _getKoreanErrorMessage(e.code);
     } catch (e) {
-      print('Resend Verification Error: $e');
+      // print('Resend Verification Error: $e');
       throw '인증 메일 발송에 실패했습니다.';
     }
   }
@@ -143,7 +143,7 @@ class AuthService {
       }
       return isVerified;
     } catch (e) {
-      print('Verification Check Error: $e');
+      // print('Verification Check Error: $e');
       return false;
     }
   }
@@ -179,10 +179,10 @@ class AuthService {
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      print('Google Sign-In Error: ${e.code}');
+      // print('Google Sign-In Error: ${e.code}');
       throw _getKoreanErrorMessage(e.code);
     } catch (e) {
-      print('Google Sign-In Error: $e');
+      // print('Google Sign-In Error: $e');
       throw '구글 로그인 중 오류가 발생했습니다.';
     }
   }
@@ -204,7 +204,7 @@ class AuthService {
         });
       }
     } catch (e) {
-      print('Error updating birthDate: $e');
+      // print('Error updating birthDate: $e');
       throw '생년월일 업데이트 중 오류가 발생했습니다.';
     }
   }
@@ -220,7 +220,7 @@ class AuthService {
         _googleSignIn.signOut(),
       ]);
     } catch (e) {
-      print('Sign Out Error: $e');
+      // print('Sign Out Error: $e');
       throw '로그아웃에 실패했습니다.';
     }
   }
@@ -241,7 +241,7 @@ class AuthService {
       
       return maskedEmail;
     } catch (e) {
-      print('Find Email Error: $e');
+      // print('Find Email Error: $e');
       throw '아이디 찾기에 실패했습니다.';
     }
   }
@@ -272,10 +272,10 @@ class AuthService {
 
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      print('Password Reset Error: ${e.code}');
+      // print('Password Reset Error: ${e.code}');
       throw _getKoreanErrorMessage(e.code);
     } catch (e) {
-      print('Password Reset Error: $e');
+      // print('Password Reset Error: $e');
       throw '비밀번호 재설정 이메일 발송에 실패했습니다.';
     }
   }

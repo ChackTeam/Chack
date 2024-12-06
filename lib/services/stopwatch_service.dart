@@ -73,7 +73,7 @@ class StopwatchService extends TimerService {
 
   // TimerService와의 호환성을 위한 오버라이드
   @override
-  String formatElapsedTime(int asd) {
+  String formatElapsedTime(int elapsedSeconds) {
     return formatTime();
   }
 

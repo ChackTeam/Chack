@@ -59,7 +59,7 @@ class BookCacheService {
           final List<dynamic> decoded = json.decode(booksJson);
           return decoded.map((json) => Book.fromJson(json)).toList();
         } catch (e) {
-          print('Cache parsing error: $e');
+          // print('Cache parsing error: $e');
           await _booksBox.delete(cacheKey);
           return [];
         }

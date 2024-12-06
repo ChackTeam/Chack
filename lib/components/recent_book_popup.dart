@@ -37,18 +37,16 @@ class RecentBookPopup extends StatelessWidget {
               Positioned(
                 left: 35,
                 bottom: 0,
-                child: Container(
-                  child: Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  width: 60,
+                  height: 80,
+                  errorBuilder: (context, error, stackTrace) => Container(
                     width: 60,
                     height: 80,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      width: 60,
-                      height: 80,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.book, color: Colors.grey),
-                    ),
+                    color: Colors.grey[300],
+                    child: const Icon(Icons.book, color: Colors.grey),
                   ),
                 ),
               ),

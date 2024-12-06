@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../constants/icons.dart';
-import '../constants/text_styles.dart';
-import '../constants/bookcover_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/colors.dart';
+
+import 'package:chack_project/constants/icons.dart';
+import 'package:chack_project/constants/text_styles.dart';
+import 'package:chack_project/constants/bookcover_styles.dart';
+import 'package:chack_project/constants/colors.dart';
 
 class BookshelfBookCard extends StatelessWidget {
   final String? imageUrl;

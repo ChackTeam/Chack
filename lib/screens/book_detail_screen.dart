@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:chack_project/constants/icons.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/components/custom_alert_banner.dart';
 import 'package:chack_project/services/bookshelf_service.dart';
-import '../services/recommended_books_service.dart';
-import '../services/book_cache_service.dart';
-import '../services/library_info_service.dart';
+import 'package:chack_project/services/recommended_books_service.dart';
+import 'package:chack_project/services/book_cache_service.dart';
+import 'package:chack_project/services/library_info_service.dart';
 import 'package:chack_project/screens/book_review_screen.dart';
-import '../../constants/icons.dart';
-import '../../constants/colors.dart';
-import '../components/custom_alert_banner.dart';
-import 'dart:ui';
 
 class BookDetailScreen extends StatefulWidget {
   final String userId;
@@ -32,10 +33,10 @@ class BookDetailScreen extends StatefulWidget {
   });
 
   @override
-  _BookDetailScreenState createState() => _BookDetailScreenState();
+  BookDetailScreenState createState() => BookDetailScreenState();
 }
 
-class _BookDetailScreenState extends State<BookDetailScreen> {
+class BookDetailScreenState extends State<BookDetailScreen> {
   final BookshelfService _bookshelfService = BookshelfService();
   bool _isInShelf = false;
   bool _isLoading = true;

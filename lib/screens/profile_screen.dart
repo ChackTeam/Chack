@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../components/custom_alert_banner.dart';
-import '../constants/icons.dart';
-import '../constants/colors.dart';
-import 'settings/profile_settings_screen.dart';
-import 'settings/account_info_screen.dart';
-import 'settings/notification_settings_screen.dart';
-import 'settings/support_screen.dart';
-import 'settings/data_reset_screen.dart';
+
+import 'package:chack_project/components/custom_alert_banner.dart';
+import 'package:chack_project/constants/icons.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/screens/settings/profile_settings_screen.dart';
+import 'package:chack_project/screens/settings/account_info_screen.dart';
+import 'package:chack_project/screens/settings/notification_settings_screen.dart';
+import 'package:chack_project/screens/settings/support_screen.dart';
+import 'package:chack_project/screens/settings/data_reset_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/login', (route) => false);
       } catch (e) {
-        print('Logout Error: $e');
+        // print('Logout Error: $e');
         CustomAlertBanner.show(
           context,
           message: '로그아웃 중 오류가 발생했습니다.',
@@ -153,8 +154,9 @@ class ProfileScreen extends StatelessWidget {
                                         fit: BoxFit.cover,
                                         loadingBuilder:
                                             (context, child, loadingProgress) {
-                                          if (loadingProgress == null)
+                                          if (loadingProgress == null) {
                                             return child;
+                                          }
                                           return const Center(
                                             child: CircularProgressIndicator(),
                                           );

@@ -1,13 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:chack_project/constants/colors.dart';
 import 'package:chack_project/constants/icons.dart';
-import 'package:chack_project/constants/text_styles.dart';
 import 'package:chack_project/services/statistics_service.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class StatisticsScreen extends StatefulWidget {
   final String userId;

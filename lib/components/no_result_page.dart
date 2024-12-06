@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/colors.dart';
-import '../constants/icons.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/icons.dart';
 
 class NoResultsFound extends StatelessWidget {
   final VoidCallback onRetry;
@@ -9,11 +10,11 @@ class NoResultsFound extends StatelessWidget {
   final String buttonText;
 
   const NoResultsFound({
-    Key? key,
+    super.key,
     required this.onRetry,
     required this.searchText,
     this.buttonText = '다시 검색하기',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

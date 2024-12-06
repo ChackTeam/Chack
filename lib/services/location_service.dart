@@ -1,5 +1,4 @@
 // services/location_service.dart
-
 import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
 import 'dart:async';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
-import '../../constants/bookcover_styles.dart';
-import '../screens/book_detail_screen.dart';
+
+import 'package:chack_project/constants/bookcover_styles.dart';
+import 'package:chack_project/screens/book_detail_screen.dart';
 
 class SearchedBookListItem extends StatelessWidget {
   final String userId;

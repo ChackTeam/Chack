@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import '../../components/searched_book_list_item.dart';
-import '../../components/custom_search_bar.dart';
-import '../../constants/colors.dart';
-import '../../components/no_result_page.dart';
-import '../../services/book_search_service.dart';
-import '../../models/book_search_result.dart';
-import 'search_screen.dart';
+
+import 'package:chack_project/components/searched_book_list_item.dart';
+import 'package:chack_project/components/custom_search_bar.dart';
+import 'package:chack_project/components/no_result_page.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/services/book_search_service.dart';
+import 'package:chack_project/models/book_search_result.dart';
+import 'package:chack_project/screens/search/search_screen.dart';
 
 class SearchResultsScreen extends StatefulWidget {
   final String userId; // userId 추가
@@ -206,12 +207,12 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                         children: [
                           SearchedBookListItem(
                             userId: widget.userId, // userId 추가
-                            isbn: book.isbn ?? 'unknown', // isbn 추가
+                            isbn: book.isbn, // isbn 추가
                             title: book.title,
                             author: book.author,
                             publisher: book.publisher,
                             image: book.imageUrl,
-                            description: book.description ?? '설명 없음',
+                            description: book.description,
                           ),
                           if (index < _searchResults.length - 1)
                             Padding(

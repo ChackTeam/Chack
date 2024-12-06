@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:chack_project/constants/text_styles.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Firebase import 추가
-import '../../constants/icons.dart';
-import '../../constants/colors.dart';
-import '../constants/icons.dart';
-import '../components/book_review/book_readingtime_card.dart';
-import '../components/book_review/book_review_card.dart';
-import '../../services/book_review_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:chack_project/constants/icons.dart';
+import 'package:chack_project/components/book_review/book_readingtime_card.dart';
+import 'package:chack_project/components/book_review/book_review_card.dart';
 
 class ReviewWritingScreen extends StatefulWidget {
   // StatelessWidget에서 StatefulWidget으로 변경

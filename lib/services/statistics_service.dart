@@ -64,7 +64,7 @@ class StatisticsService {
 
       return monthlyStats;
     } catch (e) {
-      print('Error getting monthly reading stats: $e');
+      // print('Error getting monthly reading stats: $e');
       return {};
     }
   }
@@ -79,13 +79,15 @@ class StatisticsService {
           .doc(userId)
           .get();
 
-      if (!doc.exists) return List.generate(
+      if (!doc.exists) {
+        return List.generate(
         7,
         (index) => (
           date: weekAgo.add(Duration(days: index)),
           seconds: 0,
         ),
       );
+      }
 
       List<({DateTime date, int seconds})> weeklyData = [];
       
@@ -105,7 +107,7 @@ class StatisticsService {
     } catch (e) {
       final today = DateTime.now();
       final weekAgo = today.subtract(const Duration(days: 6));
-      print('Error getting weekly reading stats: $e');
+      // print('Error getting weekly reading stats: $e');
       return List.generate(
         7,
         (index) => (
@@ -124,7 +126,7 @@ class StatisticsService {
       
       return monthlyData.values.reduce((max, value) => value > max ? value : max);
     } catch (e) {
-      print('Error getting max reading time: $e');
+      // print('Error getting max reading time: $e');
       return 0;
     }
   }
@@ -138,7 +140,7 @@ class StatisticsService {
       final totalSeconds = monthlyData.values.reduce((sum, value) => sum + value);
       return totalSeconds / monthlyData.length;
     } catch (e) {
-      print('Error calculating average reading time: $e');
+      // print('Error calculating average reading time: $e');
       return 0;
     }
   }
@@ -153,7 +155,7 @@ class StatisticsService {
       }
       return total;
     } catch (e) {
-      print('Error calculating weekly total reading time: $e');
+      // print('Error calculating weekly total reading time: $e');
       return 0;
     }
   }
@@ -166,7 +168,7 @@ class StatisticsService {
       
       return monthlyData.values.reduce((total, seconds) => total + seconds);
     } catch (e) {
-      print('Error calculating monthly total reading time: $e');
+      // print('Error calculating monthly total reading time: $e');
       return 0;
     }
   }
@@ -196,7 +198,7 @@ class StatisticsService {
 
       return streak;
     } catch (e) {
-      print('Error calculating reading streak: $e');
+      // print('Error calculating reading streak: $e');
       return 0;
     }
   }

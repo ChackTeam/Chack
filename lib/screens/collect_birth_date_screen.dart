@@ -1,22 +1,22 @@
 // screens/collect_birth_date_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../constants/colors.dart';
-import '../constants/text_styles.dart';
-import '../components/birthday_input/birthdate_text_field.dart';
-import '../components/birthday_input/birthdate_button.dart';
-import '../components/custom_alert_banner.dart';
-import '../services/authentication_service.dart';
+
+import 'package:chack_project/components/birthday_input/birthdate_text_field.dart';
+import 'package:chack_project/components/birthday_input/birthdate_button.dart';
+import 'package:chack_project/components/custom_alert_banner.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/text_styles.dart';
+import 'package:chack_project/services/authentication_service.dart';
 
 class CollectBirthDateScreen extends StatefulWidget {
   const CollectBirthDateScreen({super.key});
 
   @override
-  _CollectBirthDateScreenState createState() => _CollectBirthDateScreenState();
+  CollectBirthDateScreenState createState() => CollectBirthDateScreenState();
 }
 
-class _CollectBirthDateScreenState extends State<CollectBirthDateScreen> {
+class CollectBirthDateScreenState extends State<CollectBirthDateScreen> {
   final TextEditingController _birthDateController = TextEditingController();
   final AuthService _authService = AuthService();
   bool _isLoading = false;
@@ -177,7 +177,7 @@ class _CollectBirthDateScreenState extends State<CollectBirthDateScreen> {
         (route) => false,
       );
     } catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
       CustomAlertBanner.show(
         context,
         message: e.toString(),
@@ -255,8 +255,6 @@ class _CollectBirthDateScreenState extends State<CollectBirthDateScreen> {
   }
 }
 
-// 날짜 입력 시 자동으로 '.' 추가하는 Formatter
-// 날짜 입력 시 자동으로 '-' 추가하는 Formatter
 class _DateInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

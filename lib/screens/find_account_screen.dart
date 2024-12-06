@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../services/authentication_service.dart';
+
 import 'package:flutter/services.dart';
-import '../components/custom_text_field.dart';
-import '../components/primary_button.dart';
-import '../components/custom_alert_banner.dart';
-import '../constants/text_styles.dart';
-import '../constants/colors.dart';
+import 'package:chack_project/components/custom_text_field.dart';
+import 'package:chack_project/components/primary_button.dart';
+import 'package:chack_project/components/custom_alert_banner.dart';
+import 'package:chack_project/constants/text_styles.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/services/authentication_service.dart';
 
 class FindAccountScreen extends StatefulWidget {
   final bool isFindPassword;
@@ -118,7 +119,7 @@ class _FindAccountScreenState extends State<FindAccountScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Icon(
+                        const Icon(
                           Icons.copy,
                           size: 20,
                           color: AppColors.pointColor,

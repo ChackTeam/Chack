@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,9 +49,9 @@ class NotificationService {
     if (Platform.isAndroid && (await Permission.notification.isDenied)) {
       final status = await Permission.notification.request();
       if (status == PermissionStatus.granted) {
-        print("알림 권한이 허용되었습니다.");
+        // print("알림 권한이 허용되었습니다.");
       } else {
-        print("알림 권한이 거부되었습니다.");
+        // print("알림 권한이 거부되었습니다.");
       }
     }
   }

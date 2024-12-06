@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants/colors.dart';
+
+import 'package:chack_project/constants/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -11,7 +12,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onChanged;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     this.obscureText = false,
     this.controller,
@@ -19,7 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.hasError = false,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

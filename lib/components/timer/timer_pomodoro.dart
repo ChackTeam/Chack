@@ -22,10 +22,10 @@ class PomodoroPage extends StatefulWidget {
   });
 
   @override
-  _PomodoroPageState createState() => _PomodoroPageState();
+  PomodoroPageState createState() => PomodoroPageState();
 }
 
-class _PomodoroPageState extends State<PomodoroPage>
+class PomodoroPageState extends State<PomodoroPage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true; // 상태 유지 활성화
@@ -94,7 +94,7 @@ class _PomodoroPageState extends State<PomodoroPage>
       // Firestore 업데이트 후 저장 시간 초기화 (UI용 시간은 유지)
       widget.timerService.elapsedTimeForFirestore = 0;
     } catch (e) {
-      print('Failed to update reading time: $e');
+      // // print('Failed to update reading time: $e');
     }
   }
 
@@ -238,6 +238,7 @@ class _PomodoroPageState extends State<PomodoroPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
 import 'package:flutter/services.dart';
-import '../../constants/text_styles.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/text_styles.dart';
 
 class BirthdateTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -13,7 +14,7 @@ class BirthdateTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   const BirthdateTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
     this.hasError = false,
@@ -21,7 +22,7 @@ class BirthdateTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.validator,
     this.inputFormatters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class BirthdateTextField extends StatelessWidget {
         // 포커스되었을 때의 border
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: AppColors.pointColor, // 원하는 색상으로 설정
             width: 2.0,
           ),

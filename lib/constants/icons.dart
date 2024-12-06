@@ -15,8 +15,7 @@ class AppIcons {
   static const String bookAddIcon = 'assets/images/book_add.svg';
   static const String bookDeleteIcon = 'assets/images/book_delete.svg';
   static const String bookReportIcon = 'assets/images/book_report.svg';
-  static const String emptyBookshelfIcon =
-      'assets/images/empty_bookshelf_icon.svg';
+  static const String emptyBookshelfIcon = 'assets/images/empty_bookshelf_icon.svg';
   static const String bookmarkIcon = 'assets/images/bookmark_icon.svg';
   static const String starIcon = 'assets/images/star_rate.svg';
 }

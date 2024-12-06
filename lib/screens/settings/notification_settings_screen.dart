@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../constants/colors.dart';
-import '../../components/custom_alert_banner.dart';
-import '../../services/notification_service.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/components/custom_alert_banner.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
   const NotificationSettingsScreen({super.key});
@@ -40,7 +40,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         }
       }
     } catch (e) {
-      print('Error loading notification settings: $e');
+      // print('Error loading notification settings: $e');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -68,7 +68,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         }
       }
     } catch (e) {
-      print('Error updating notification settings: $e');
+      // print('Error updating notification settings: $e');
       if (mounted) {
         CustomAlertBanner.show(
           context,
@@ -121,7 +121,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                             color: AppColors.pointColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.notifications,
                             color: AppColors.pointColor,
                             size: 24,

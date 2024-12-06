@@ -1,5 +1,4 @@
 // constants/bookcover_styles.dart
-
 import 'package:flutter/material.dart';
 
 class BookCoverStyle {

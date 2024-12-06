@@ -22,7 +22,7 @@ class DailyReadingService {
       }, SetOptions(merge: true));
       
     } catch (e) {
-      print('Error updating daily reading time: $e');
+      // print('Error updating daily reading time: $e');
       rethrow;
     }
   }
@@ -39,7 +39,7 @@ class DailyReadingService {
 
       return doc.exists ? (doc.data()?[dateStr]?['totalSeconds'] ?? 0) : 0;
     } catch (e) {
-      print('Error getting daily reading time: $e');
+      // print('Error getting daily reading time: $e');
       return 0;
     }
   }
@@ -71,7 +71,7 @@ class DailyReadingService {
 
       return monthlyStats;
     } catch (e) {
-      print('Error getting monthly reading stats: $e');
+      // print('Error getting monthly reading stats: $e');
       return {};
     }
   }

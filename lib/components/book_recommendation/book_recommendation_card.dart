@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../constants/colors.dart';
-import '../../constants/text_styles.dart';
-import '../../constants/icons.dart';
-import '../../screens/book_detail_screen.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/text_styles.dart';
+import 'package:chack_project/constants/icons.dart';
+
+import 'package:chack_project/screens/book_detail_screen.dart';
 
 class BookRecommendationCard extends StatelessWidget {
   final String userId; // 추가

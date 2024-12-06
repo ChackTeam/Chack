@@ -16,8 +16,8 @@ class BookReadingTimeService {
           .collection('books')
           .doc(isbn);
 
-      print('Updating reading time for book $isbn at path: ${bookRef.path}');
-      print('Elapsed seconds: $elapsedSeconds');
+      // print('Updating reading time for book $isbn at path: ${bookRef.path}');
+      // print('Elapsed seconds: $elapsedSeconds');
 
       await _firestore.runTransaction((transaction) async {
         final bookDoc = await transaction.get(bookRef);
@@ -43,7 +43,7 @@ class BookReadingTimeService {
           updateData['readTime'] = currentReadTime + elapsedSeconds;
           updateData['lastReadAt'] = FieldValue.serverTimestamp();
 
-          print('Updating fields: $updateData');
+          // print('Updating fields: $updateData');
 
           // 트랜잭션 업데이트
           transaction.update(bookRef, updateData);
@@ -52,9 +52,9 @@ class BookReadingTimeService {
 
       // 업데이트 확인
       final updatedDoc = await bookRef.get();
-      print('Updated document: ${updatedDoc.data()}');
+      // print('Updated document: ${updatedDoc.data()}');
     } catch (e) {
-      print('Failed to update reading time: $e');
+      // print('Failed to update reading time: $e');
       throw Exception('Failed to update reading time: $e');
     }
   }

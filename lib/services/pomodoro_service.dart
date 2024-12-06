@@ -130,7 +130,7 @@ class TimerService with WidgetsBindingObserver {
         );
         elapsedTimeForFirestore = 0;
       } catch (e) {
-        print('Error updating daily reading time: $e');
+        // print('Error updating daily reading time: $e');
       }
     }
   }

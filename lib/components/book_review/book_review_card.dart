@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../constants/colors.dart';
-import '../../constants/icons.dart';
-import '../../services/book_review_service.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/icons.dart';
+
+import 'package:chack_project/services/book_review_service.dart';
 
 class BookReviewCard extends StatefulWidget {
   final String userId;
@@ -17,10 +19,10 @@ class BookReviewCard extends StatefulWidget {
   });
 
   @override
-  _BookReviewCardState createState() => _BookReviewCardState();
+  BookReviewCardState createState() => BookReviewCardState();
 }
 
-class _BookReviewCardState extends State<BookReviewCard> {
+class BookReviewCardState extends State<BookReviewCard> {
   final BookReviewService _reviewService = BookReviewService();
   bool _isEditing = false;
   String _reviewText = '책 읽은 후 소감을 알려주세요.';

@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import '../constants/colors.dart';
-import '../services/statistics_service.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/services/statistics_service.dart';
 
 class MonthlyReadingCard extends StatefulWidget {
   const MonthlyReadingCard({

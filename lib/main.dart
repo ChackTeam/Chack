@@ -1,10 +1,11 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'screens/splash_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/main_screen.dart';
-import 'constants/colors.dart';
+
+import 'package:chack_project/screens/splash_screen.dart';
+import 'package:chack_project/screens/login_screen.dart';
+import 'package:chack_project/screens/main_screen.dart';
+import 'package:chack_project/constants/colors.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

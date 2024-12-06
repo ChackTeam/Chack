@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../services/bookshelf_service.dart';
-import '../../models/bookshelf_model.dart';
-import '../../constants/colors.dart';
-import '../../constants/icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:chack_project/services/bookshelf_service.dart';
+import 'package:chack_project/models/bookshelf_model.dart';
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/icons.dart';
 
 class BookSelectionModal extends StatefulWidget {
   final Function(Map<String, String>) onBookSelected; // 책 선택 콜백

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../constants/colors.dart';
-import '../constants/icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/constants/icons.dart';
 
 class FilterBottomSheet extends StatelessWidget {
   final List<String> filterOptions;

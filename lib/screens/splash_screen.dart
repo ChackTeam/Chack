@@ -6,11 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../constants/colors.dart';
-import '../services/book_cache_service.dart';
-import '../services/notification_service.dart';
-import 'main_screen.dart';
-import 'login_screen.dart';
+
+import 'package:chack_project/constants/colors.dart';
+import 'package:chack_project/services/book_cache_service.dart';
+import 'package:chack_project/services/notification_service.dart';
+import 'package:chack_project/screens/main_screen.dart';
+import 'package:chack_project/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -104,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 const Icon(Icons.error_outline, color: Colors.red, size: 48),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   '앱 초기화 중 오류가 발생했습니다',
                   style: TextStyle(
                     color: AppColors.textColor,
@@ -137,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 'assets/images/chack_icon.svg',
                 width: screenSize.width * 0.2,
                 height: screenSize.width * 0.2,
-                colorFilter: ColorFilter.mode(
+                colorFilter: const ColorFilter.mode(
                   AppColors.pointColor,
                   BlendMode.srcIn,
                 ),
@@ -147,8 +148,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 const CircularProgressIndicator(),
               ],
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 20.0),
                 child: Text(
                   '채크',
                   style: TextStyle(

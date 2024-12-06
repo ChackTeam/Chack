@@ -57,20 +57,4 @@ class BookDataNormalizer {
 
     return normalized;
   }
-
-  // 테스트를 위한 예시 사용법
-  static void testNormalization() {
-    final testCases = [
-      '(책이름): (책저자) (책종류)',
-      '위대한 소설 = 작가 이름 (장르)',
-      '(소설책): 작가 (소설)',
-      '(위대한 이야기): (홍길동) (소설)',
-    ];
-
-    for (var test in testCases) {
-      print('Original: $test');
-      print('Normalized title: ${normalizeTitle(test)}');
-      print('---');
-    }
-  }
 }

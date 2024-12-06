@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../services/pomodoro_service.dart';
-import '../services/stopwatch_service.dart';
-import '../components/timer/timer_pomodoro.dart';
-import '../components/timer/timer_stopwatch.dart'; // StopwatchPage import 추가
-import '../components/timer/timer_page_indicator.dart';
+
+import 'package:chack_project/components/timer/timer_pomodoro.dart';
+import 'package:chack_project/components/timer/timer_stopwatch.dart';
+import 'package:chack_project/components/timer/timer_page_indicator.dart';
+import 'package:chack_project/services/pomodoro_service.dart';
+import 'package:chack_project/services/stopwatch_service.dart';
 
 class TimerScreen extends StatefulWidget {
   final String userId;
@@ -14,10 +15,10 @@ class TimerScreen extends StatefulWidget {
   });
 
   @override
-  _TimerScreenState createState() => _TimerScreenState();
+  TimerScreenState createState() => TimerScreenState();
 }
 
-class _TimerScreenState extends State<TimerScreen> {
+class TimerScreenState extends State<TimerScreen> {
   late TimerService _timerService;
   late StopwatchService _stopwatchService;
   late PageController _pageController;

@@ -13,10 +13,10 @@ class ProfileSettingsScreen extends StatefulWidget {
   const ProfileSettingsScreen({super.key});
 
   @override
-  _ProfileSettingsScreenState createState() => _ProfileSettingsScreenState();
+  ProfileSettingsScreenState createState() => ProfileSettingsScreenState();
 }
 
-class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
+class ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   final TextEditingController _nicknameController = TextEditingController();
   DateTime? _selectedBirthDate;
   String? _profileImageUrl;
@@ -54,7 +54,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         }
       }
     } catch (e) {
-      print('Error loading user data: $e');
+      // print('Error loading user data: $e');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -87,7 +87,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         }
       }
     } catch (e) {
-      print('Error uploading profile image: $e');
+      // print('Error uploading profile image: $e');
       if (mounted) {
         CustomAlertBanner.show(
           context,
@@ -118,7 +118,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         Navigator.pop(context);
       }
     } catch (e) {
-      print('Error updating user data: $e');
+      // print('Error updating user data: $e');
       CustomAlertBanner.show(
         context,
         message: '프로필 정보 업데이트 중 오류가 발생했습니다.',
@@ -189,8 +189,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                           fit: BoxFit.cover,
                                           loadingBuilder: (context, child,
                                               loadingProgress) {
-                                            if (loadingProgress == null)
+                                            if (loadingProgress == null) {
                                               return child;
+                                            }
                                             return const Center(
                                               child:
                                                   CircularProgressIndicator(),
