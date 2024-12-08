@@ -104,12 +104,12 @@ lib/
 
 ## 6. 팀 소개
 
-| Name | Role | Contact |
-|------|------|----------|
-| 강연수 | Frontend Developer / 문서, 영상자료 담당 | Email: yskang009@gmail.com<br>GitHub: [@mamemomif](https://github.com/mamemomif) |
-| 문병진 | Frontend Developer | Email: qudwls5778@naver.com<br>GitHub: [@Moonbjin](https://github.com/Moonbjin) |
-| 조현주 | UI/UX 설계 / Frontend Developer | Email: butter0488@gmail.com<br>GitHub: [@hjuump](https://github.com/hjuump) |
-| 홍영준 | Frontend / Backend Developer | Email: moejihong@gmail.com<br>GitHub: [@HONGMOEJI](https://github.com/HONGMOEJI) |
+| Profile | Name | Role | Contact |
+|----------------------|------|------|----------|
+| <img src="https://github.com/mamemomif.png" width="50" height="50"> | 강연수 | Frontend Developer / 문서, 영상자료 담당 | Email: yskang009@gmail.com<br>GitHub: [@mamemomif](https://github.com/mamemomif) |
+| <img src="https://github.com/Moonbjin.png" width="50" height="50"> | 문병진 | Frontend Developer | Email: qudwls5778@naver.com<br>GitHub: [@Moonbjin](https://github.com/Moonbjin) |
+| <img src="https://github.com/hjuump.png" width="50" height="50"> | 조현주 | UI/UX 설계 / Frontend Developer | Email: butter0488@gmail.com<br>GitHub: [@hjuump](https://github.com/hjuump) |
+| <img src="https://github.com/HONGMOEJI.png" width="50" height="50"> | 홍영준 | Frontend / Backend Developer | Email: moejihong@gmail.com<br>GitHub: [@HONGMOEJI](https://github.com/HONGMOEJI) |
 
 ---
 
